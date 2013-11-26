@@ -1,0 +1,1 @@
+ipkg, or the Itsy Package Management System, is a lightweight package management system designed for embedded devices. It is used in the Unslung operating system for the Linksys NSLU2, in OpenWRT, OpenMoko, Gumstix, iPAQ and now on asustor NAS too.

@@ -1,0 +1,2 @@
+2013-11-26 : add x86-64 (AS-60xT) support, untested due to lack of hardware
+2013-11-22 : first release for asustor

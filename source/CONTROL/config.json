@@ -1,0 +1,31 @@
+{
+  "general":{
+	"package":"optware",
+	"name":"Optware ipkg",
+	"version":"0.99.163",
+	"depends":[],
+	"conflicts":[],
+	"developer":"Unslung",
+	"maintainer":"MrK",
+	"email":"",
+	"website":"http://www.nslu2-linux.org/wiki/Optware/HomePage",
+	"architecture":"##ARCH##",
+	"firmware":"2.0"
+  },
+  "register":{
+	"boot-priority":{
+	  "start-order":95,
+	  "stop-order":35
+	},
+	"share-folder":[
+	   {
+	     "name":"Optware",
+	     "description":"Local feed for Optware packages"
+	   }
+	],
+	"prerequisites":{
+	  "enable-service":[],
+	  "restart-service":[]
+	}
+  }
+}
