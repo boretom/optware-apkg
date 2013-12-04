@@ -25,7 +25,7 @@ case "$APKG_PKG_STATUS" in
 			echo "[PKG INSTALL] remove unnecessary /etc/init.d/S99Optware script" >> $INSTALL_LOG 2>&1
 			rm /etc/init.d/S99Optware
 		fi
-		# copy local package feed template (empty package list) if
+		# copy local package feed template (empty package list) if it doesn't exist yet
 		if [[ ! -f $OPTWARE_PKG_DIR/local-feed/asustor-${HOST_ARCH}/cross/unstable/Packages.filelist ]]; then
 			echo "[PKG INSTALL] copy local package feed template to Optware local feed directory" >> $INSTALL_LOG 2>&1
 			cp -aR $PKG_DIR/local-feed/ $OPTWARE_PKG_DIR/

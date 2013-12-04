@@ -1,6 +1,9 @@
 #!/bin/sh -e
 NAME="Optware ipkg"
+HOST_ARCH=$(uname -m)
 PKG_PATH=/usr/local/AppCentral/optware
+CD=${PKG_PATH}/bin/coreutils-${HOST_ARCH}-cp
+FIND=/usr/bin/find
 
 if test -z "${REAL_OPT_DIR}"; then
    # next line to be replaced according to OPTWARE_TARGET
@@ -9,9 +12,27 @@ fi
 
 . /lib/lsb/init-functions
 
+function move_opt () {
+	if test "$1" = "to-optware"; then
+		# move file from /opt to our ./opt
+		cd /opt
+		$FIND ./ -type l -exec $CP --parent -pP {} ${PKG_PATH}/opt/ \;
+	elif test "$1" = "from-optware"; then
+		echo "not implemented yet!"
+		exit 1
+	else
+		echo "not argument passed!"
+		exit 1
+	fi
+}
+
 case "$1" in
     start)
 	echo "Starting $NAME"
+	# check if there are already symbolic links in /opt and move
+	# them to our opt
+	move_opt "to-optware"
+
 	if test -n "${REAL_OPT_DIR}"; then
 	    if ! grep ' /opt ' /proc/mounts >/dev/null 2>&1 ; then
 		mkdir -p /opt
