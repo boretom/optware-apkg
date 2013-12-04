@@ -1,0 +1,23 @@
+HOST_ARCH=$(uname -m)
+CP=${PKG_PATH}/bin/coreutils-${HOST_ARCH}-cp
+#FIND=/usr/bin/find
+FIND=${PKG_PATH}/bin/findutils-${HOST_ARCH}-find
+
+### check and move existing sym. links to our ../opt
+### PKG_PATH has to be defined
+move_opt () {
+	if test "$1" = "to-optware"; then
+		# move file from /opt to our ./opt
+		cd /opt
+		#echo "find command: $FIND, cp command $CP" >> $LOGFILE
+		$FIND ./ -type l -exec $CP --parents -pP {} ${PKG_PATH}/opt/ \;
+	elif test "$1" = "from-optware"; then
+		echo "not implemented yet!"
+		exit 1
+	else
+		echo "not argument passed!"
+		exit 1
+	fi
+}
+
+exit 0

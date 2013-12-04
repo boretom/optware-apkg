@@ -14,6 +14,10 @@ APKGTOOL=$APP_PATH/apkg-tools.py
 # exit
 
 usage () { echo "usage: $APP_NAME [i386|x86-64|all]   Create package(s) for specified NAS arch(s)"
+echo
+echo "       $APP_NAME i386                Create package for 32-bit based NAS (AS-20xT/TE and AS-30xT)"
+echo "       $APP_NAME x86-64              Create package for 64-bit based NAS (AS-60xT)"
+echo "       $APP_NAME all                 Create packages for both 32-bit and 64-bit based NAS"
 echo "       $APP_NAME [--help|-h]         Shows this help :)"
 echo
 echo "creates Optware asustor package for the specified NAS architecture"
@@ -30,7 +34,7 @@ if [ $# -ne 1 ]; then
 	echo "[ERROR] pass package arch as an argument"
 	usage
 	exit 2 
-elif [ "$1" = "i386" -o  "$1" = "x86-64"  ]; then
+elif [ "$1" = "i386" -o "$1" = "x86-64" ]; then
 	echo "[INFO] create package for asustor $1 NAS"
 	APK_ARCH=$1
 elif [ "$1" = "all" ]; then

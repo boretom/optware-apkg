@@ -7,9 +7,12 @@
 ./CONTROL/pre-install.sh
 ./CONTROL/start-stop.sh
 ./bin/asustor-x86_64-bootstrap_1.2-7_x86_64.xsh
+./bin/coreutils-x86_64-cp
+./bin/findutils-x86_64-find
 ./etc/S99Optware
 ./etc/profile
 ./etc/profile.d/optware.sh
+./lib/sh-functions
 ./local-feed/asustor-x86_64/cross/unstable/Packages
 ./local-feed/asustor-x86_64/cross/unstable/Packages.filelist
 ./local-feed/asustor-x86_64/cross/unstable/Packages.gz
