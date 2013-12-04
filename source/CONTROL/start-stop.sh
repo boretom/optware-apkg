@@ -2,8 +2,11 @@
 NAME="Optware ipkg"
 HOST_ARCH=$(uname -m)
 PKG_PATH=/usr/local/AppCentral/optware
-CD=${PKG_PATH}/bin/coreutils-${HOST_ARCH}-cp
-FIND=/usr/bin/find
+LOGFILE=/tmp/optware-start-stop.log
+
+CP=${PKG_PATH}/bin/coreutils-${HOST_ARCH}-cp
+#FIND=/usr/bin/find
+FIND=${PKG_PATH}/bin/findutils-${HOST_ARCH}-find
 
 if test -z "${REAL_OPT_DIR}"; then
    # next line to be replaced according to OPTWARE_TARGET
@@ -11,32 +14,23 @@ if test -z "${REAL_OPT_DIR}"; then
 fi
 
 . /lib/lsb/init-functions
-
-function move_opt () {
-	if test "$1" = "to-optware"; then
-		# move file from /opt to our ./opt
-		cd /opt
-		$FIND ./ -type l -exec $CP --parent -pP {} ${PKG_PATH}/opt/ \;
-	elif test "$1" = "from-optware"; then
-		echo "not implemented yet!"
-		exit 1
-	else
-		echo "not argument passed!"
-		exit 1
-	fi
-}
+. ${PKG_PATH}/lib/sh-functions
 
 case "$1" in
     start)
 	echo "Starting $NAME"
 	# check if there are already symbolic links in /opt and move
 	# them to our opt
-	move_opt "to-optware"
+	if move_opt "to-optware"; then
+		echo "move_opt didn't succeed" >> $LOGFILE
+	else
+		echo "move_opt did succeed" >> $LOGFILE
+	fi
 
 	if test -n "${REAL_OPT_DIR}"; then
 	    if ! grep ' /opt ' /proc/mounts >/dev/null 2>&1 ; then
-		mkdir -p /opt
-		mount -o bind ${REAL_OPT_DIR} /opt
+			mkdir -p /opt ${REAL_OPT_DIR}
+			mount -o bind ${REAL_OPT_DIR} /opt
 	    fi
 	fi
 	if ! grep 'export ENV=/opt/etc/profile' /etc/profile ; then
@@ -53,11 +47,11 @@ case "$1" in
 	## -> does that really make sense?
 	if test -n "${REAL_OPT_DIR}"; then
 	    if grep ' /opt ' /proc/mounts >/dev/null 2>&1 ; then
-		umount /opt
+			umount /opt
 	    fi
 	fi
 	# remove the ENV variable from /etc/profile
-	sed -i -e '%^export ENV=/opt/etc/profile$%d' /etc/profile
+	sed -i -e '/^export ENV=\/opt\/etc\/profile$/d' /etc/profile
 
 	;;
     restart)

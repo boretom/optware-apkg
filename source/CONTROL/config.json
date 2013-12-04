@@ -14,8 +14,8 @@
   },
   "register":{
 	"boot-priority":{
-	  "start-order":00,
-	  "stop-order":00
+	  "start-order":22,
+	  "stop-order":22
 	},
 	"share-folder":[
 	   {

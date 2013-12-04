@@ -7,6 +7,8 @@ BOOTSTRAP_SCRIPT=$PKG_DIR/bin/asustor-${HOST_ARCH}-bootstrap_1.2-7_${HOST_ARCH}.
 
 INSTALL_LOG=$PKG_DIR/boostrap_$(date +"%Y%m%d_%H%M%S").log
 
+source ${PKG_DIR}/lib/sh-functions
+
 case "$APKG_PKG_STATUS" in
 	install)
 		# if there's no opt sub-directory in the app directory run
@@ -19,6 +21,8 @@ case "$APKG_PKG_STATUS" in
 		else
 			echo "[PKG INSTALL] '/opt' dir already exists. Won't do anything" >> $INSTALL_LOG 2>&1
 		fi
+		# move /opt sym. links
+		move_opt "to-optware"
 		# remove the unnecessary /etc/init.d/S99Optware file - not the best solution but a lot easier then
 		# changing the Optware bootstrap script template
 		if [[ -f /etc/init.d/S99Optware ]]; then
