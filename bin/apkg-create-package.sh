@@ -87,6 +87,7 @@ for arch in $APK_ARCH; do
 	echo "[INFO] finally create the APK ${arch} package in ${TMP_DIR}"
 	CUR_DIR=$PWD
 	cd $TMP_DIR
+	chown -R root:root ${DEST_DIR}/*
 	$APKGTOOL create "${DEST_DIR}"
 	if [ $? -ne 0 ]; then
 		cd $CUR_DIR
