@@ -14,6 +14,9 @@ APKGTOOL=$APP_PATH/apkg-tools.py
 # exit
 
 usage () { echo "usage: $APP_NAME [i386|x86-64|all]   Create package(s) for specified NAS arch(s)"
+echo "       $APP_NAME i386                Create package for 32-bit based NAS (AS-20xT/TE and AS-30xT)"
+echo "       $APP_NAME x86-64              Create package for 64-bit based NAS (AS-60xT)"
+echo "       $APP_NAME all                 Create packages for both 32-bit and 64-bit based NAS"
 echo "       $APP_NAME [--help|-h]         Shows this help :)"
 echo
 echo "creates Optware asustor package for the specified NAS architecture"
@@ -21,7 +24,8 @@ echo "creates Optware asustor package for the specified NAS architecture"
 
 # check if we got root permissions
 if [ ! "$(whoami)" = "root" ]; then
-	echo "[ERROR] script has to run as root!"
+	echo "[ERROR] script has to be run as root!"
+	usage
 	exit 1
 fi
 
@@ -30,7 +34,7 @@ if [ $# -ne 1 ]; then
 	echo "[ERROR] pass package arch as an argument"
 	usage
 	exit 2 
-elif [ "$1" = "i386" -o  "$1" = "x86-64"  ]; then
+elif [ "$1" = "i386" -o "$1" = "x86-64" ]; then
 	echo "[INFO] create package for asustor $1 NAS"
 	APK_ARCH=$1
 elif [ "$1" = "all" ]; then
@@ -72,6 +76,11 @@ for arch in $APK_ARCH; do
 		echo "[ERROR] couldn't set ${arch} in config.json... abort"
 		exit 5
 	fi
+	echo "[INFO] insert ./source/lib/sh-functions into post-install.sh..."
+	sed -i -e '/###INSERT lib\/sh-functions HERE###/ { 
+			s/###INSERT lib\/sh-functions HERE###//g 
+			r ./source/lib/sh-functions
+		}' ${DEST_DIR}/CONTROL/post-install.sh
 
 	# apkg-tools.py is quite a simple script - doesn't allow any output
 	# directory to be specified. So we have to do it yourselfs
