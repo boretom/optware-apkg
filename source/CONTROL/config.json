@@ -2,7 +2,7 @@
   "general":{
 	"package":"optware",
 	"name":"Optware ipkg",
-	"version":"0.99.163",
+	"version":"0.99.163-tk-1",
 	"depends":[],
 	"conflicts":[],
 	"developer":"Unslung",

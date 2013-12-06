@@ -3,7 +3,6 @@
 HOST_ARCH=$(uname -m)
 PKG_DIR=$APKG_PKG_DIR
 OPTWARE_PKG_DIR=/volume1/Optware
-BOOTSTRAP_SCRIPT=$PKG_DIR/bin/asustor-${HOST_ARCH}-bootstrap_1.2-7_${HOST_ARCH}.xsh
 
 INSTALL_LOG=$PKG_DIR/boostrap_$(date +"%Y%m%d_%H%M%S").log
 IPKG_NAME=ipkg-opt_0.99.163-10_i686.ipk

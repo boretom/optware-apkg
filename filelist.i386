@@ -6,9 +6,8 @@
 ./CONTROL/post-install.sh
 ./CONTROL/pre-install.sh
 ./CONTROL/start-stop.sh
-./bin/coreutils-i686-cp
-./bin/findutils-i686-find
-./etc/S99Optware
+./bin/i686/cp
+./bin/i686/find
 ./etc/profile
 ./etc/profile.d/optware.sh
 ./lib/sh-functions

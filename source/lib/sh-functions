@@ -1,7 +1,7 @@
 ### PKG_DIR and HOST_ARCH have to be defined
-CP=${PKG_DIR}/bin/coreutils-${HOST_ARCH}-cp
-#FIND=/usr/bin/find
-FIND=${PKG_DIR}/bin/findutils-${HOST_ARCH}-find
+CP=${PKG_DIR}/bin/${HOST_ARCH}/cp
+FIND=${PKG_DIR}/bin/${HOST_ARCH}/find
+RM=/bin/rm
 
 ### check and move existing sym. links to our ../opt
 DEST_DIR=$PKG_DIR/opt
@@ -11,6 +11,25 @@ move_to_optware_opt () {
 	CURDIR=$PWD
 	[ -d $DEST_DIR ] || mkdir -p $DEST_DIR
 	cd /opt
+	# find symlinks and coying them over to optware/opt
 	$FIND ./ -type l -exec $CP --parents -pP {} ${DEST_DIR}/ \;
+	# now delete everyting in /opt assuming there were only symlinks
+	rm -f /opt/*
+	cd $CURDIR
+}
+
+move_to_opt () {
+	CURDIR=$PWD
+	# search symlinks in optware/opt which link to an file with an absolute
+	# path and the path doesn't start with /opt
+	cd ${PKG_DIR}/opt
+	symlink_list=$($FIND ./ -type l -printf "%p | %l\n" | \
+			awk -F'|' '/\| \/[^o][^p][^t]/ {print $1}')
+	for i in $symlink_list; do
+		$CP --parents -pP $i /opt
+		$RM $i
+	done	
+	# delete the empty directories recursively
+	$FIND ./ -depth -type d -empty | xargs rmdir -p
 	cd $CURDIR
 }

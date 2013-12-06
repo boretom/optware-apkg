@@ -6,9 +6,11 @@
 ./CONTROL/post-install.sh
 ./CONTROL/pre-install.sh
 ./CONTROL/start-stop.sh
-./etc/S99Optware
+./bin/x86_64/cp
+./bin/x86_64/find
 ./etc/profile
 ./etc/profile.d/optware.sh
+./lib/sh-functions
 ./local-feed/asustor-x86_64/cross/unstable/Packages
 ./local-feed/asustor-x86_64/cross/unstable/Packages.filelist
 ./local-feed/asustor-x86_64/cross/unstable/Packages.gz

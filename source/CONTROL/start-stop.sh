@@ -34,6 +34,7 @@ case "$1" in
 	# run the optware init scripts
 	[ -x /opt/etc/rc.optware ] && /opt/etc/rc.optware
 	;;
+
     stop)
 	echo "Stopping $NAME"
 	## TODO : using lsof (install if necessary) to determine if
@@ -43,15 +44,18 @@ case "$1" in
 		# delete symlink to REAL_OPT_DIR and create a new, empty one
 		rm /opt
 		mkdir /opt
+		move_to_opt
 	fi
 	# remove the ENV variable from /etc/profile
 	sed -i -e '/^export ENV=\/opt\/etc\/profile$/d' /etc/profile
 
 	;;
+
     restart)
 	echo "Restarting $NAME"
 
 	;;
+
     *)
 	echo "Usage: $0 {start|stop|restart}"
 	exit 2
