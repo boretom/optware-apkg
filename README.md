@@ -12,7 +12,7 @@ The `source` directory contains all files needed for Optware's ipkg to run on i3
 # What the package installer will do: #
 
 * creates a share 'Optware' on '/volume1'. If it exists it won't be touched
-* installing the '/opt' stuff into /usr/local/AppCentral/optware and binds that dir to /opt
+* installing the '/opt' stuff into /usr/local/AppCentral/optware and symlinks that dir to /opt
 * adds ENV variable to /etc/profile to set /opt/{sbin,bin} include path
 * for AS-20xT/TE & AS-30xT sets up to use two package feeds per default:
 	* i686g25 feed : i686 compile with gblic 2.5
