@@ -9,6 +9,8 @@ INSTALL_LOG=$PKG_DIR/boostrap_$(date +"%Y%m%d_%H%M%S").log
 IPKG_NAME=ipkg-opt_0.99.163-10_i686.ipk
 ASUSTOR_LOCAL_FEED=asustor-${HOST_ARCH}-feed.conf
 
+. ${PKG_DIR}/lib/sh-functions
+
 case "$APKG_PKG_STATUS" in
 	install)
 		echo "[PKG INSTALL] creating tmp directory for installation" >> $INSTALL_LOG 2>&1
@@ -18,6 +20,11 @@ case "$APKG_PKG_STATUS" in
 		mv ${PKG_DIR}/packages/${IPKG_NAME} $TMP_DIR
 		rmdir ${PKG_DIR}/packages
 		tar -xOvzf ${IPKG_NAME} ./data.tar.gz | tar -C ${PKG_DIR} -xzvf - 2>/dev/null
+
+		echo "[PKG INSTALL] copying symlinks in /opt to optware/opt" >> $INSTALL_LOG 2>&1
+		move_to_optware_opt
+		rm -rf /opt/*
+		rm -rf /opt/.[^.]*
 
 		echo "[PKG INSTALL] sym-link to /opt ... if /opt is empty" >> $INSTALL_LOG 2>&1
 		rmdir /opt

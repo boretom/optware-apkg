@@ -1,6 +1,7 @@
 #!/bin/sh -e
+HOST_ARCH=$(uname -m)
 NAME="Optware ipkg"
-PKG_PATH=/usr/local/AppCentral/optware
+PKG_DIR=/usr/local/AppCentral/optware
 
 if test -z "${REAL_OPT_DIR}"; then
    # next line to be replaced according to OPTWARE_TARGET
@@ -8,12 +9,15 @@ if test -z "${REAL_OPT_DIR}"; then
 fi
 
 . /lib/lsb/init-functions
+. ${PKG_DIR}/lib/sh-functions
 
 case "$1" in
     start)
 	echo "Starting $NAME"
 	if test -n "${REAL_OPT_DIR}"; then
 		if [ ! -L /opt ]; then
+			move_to_optware_opt
+			rm -rf /opt/* && rm -rf /opt/.[^.]*
 			# if /opt is not an symlink and the directory is empty
 			rmdir /opt
 			if [ $? -ne 0 ]; then

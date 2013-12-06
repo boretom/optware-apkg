@@ -1,0 +1,16 @@
+### PKG_DIR and HOST_ARCH have to be defined
+CP=${PKG_DIR}/bin/coreutils-${HOST_ARCH}-cp
+#FIND=/usr/bin/find
+FIND=${PKG_DIR}/bin/findutils-${HOST_ARCH}-find
+
+### check and move existing sym. links to our ../opt
+DEST_DIR=$PKG_DIR/opt
+
+# move symlinks from /opt to optware/opt
+move_to_optware_opt () {
+	CURDIR=$PWD
+	[ -d $DEST_DIR ] || mkdir -p $DEST_DIR
+	cd /opt
+	$FIND ./ -type l -exec $CP --parents -pP {} ${DEST_DIR}/ \;
+	cd $CURDIR
+}

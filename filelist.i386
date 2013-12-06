@@ -6,9 +6,12 @@
 ./CONTROL/post-install.sh
 ./CONTROL/pre-install.sh
 ./CONTROL/start-stop.sh
+./bin/coreutils-i686-cp
+./bin/findutils-i686-find
 ./etc/S99Optware
 ./etc/profile
 ./etc/profile.d/optware.sh
+./lib/sh-functions
 ./local-feed/asustor-i686/cross/unstable/Packages
 ./local-feed/asustor-i686/cross/unstable/Packages.filelist
 ./local-feed/asustor-i686/cross/unstable/Packages.gz
