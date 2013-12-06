@@ -13,10 +13,15 @@ case "$1" in
     start)
 	echo "Starting $NAME"
 	if test -n "${REAL_OPT_DIR}"; then
-	    if ! grep ' /opt ' /proc/mounts >/dev/null 2>&1 ; then
-		mkdir -p /opt
-		mount -o bind ${REAL_OPT_DIR} /opt
-	    fi
+		if [ ! -L /opt ]; then
+			# if /opt is not an symlink and the directory is empty
+			rmdir /opt
+			if [ $? -ne 0 ]; then
+				echo "/opt wasn't empty... too bad."
+				exit 1
+			fi
+			ln -s ${REAL_OPT_DIR} /opt
+		fi
 	fi
 	if ! grep 'export ENV=/opt/etc/profile' /etc/profile ; then
 	   echo 'export ENV=/opt/etc/profile' >> /etc/profile
@@ -31,12 +36,12 @@ case "$1" in
 	## any apps running on /opt and stop them
 	## -> does that really make sense?
 	if test -n "${REAL_OPT_DIR}"; then
-	    if grep ' /opt ' /proc/mounts >/dev/null 2>&1 ; then
-		umount /opt
-	    fi
+		# delete symlink to REAL_OPT_DIR and create a new, empty one
+		rm /opt
+		mkdir /opt
 	fi
 	# remove the ENV variable from /etc/profile
-	sed -i -e '%^export ENV=/opt/etc/profile$%d' /etc/profile
+	sed -i -e '/^export ENV=\/opt\/etc\/profile$/d' /etc/profile
 
 	;;
     restart)

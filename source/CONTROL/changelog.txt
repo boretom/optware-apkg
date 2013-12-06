@@ -1,2 +1,4 @@
+2013-12-06 : changed install method from running the xsh script to manually
+             unpacking ipkg-opt.ipk
 2013-11-26 : add x86-64 (AS-60xT) support, untested due to lack of hardware
 2013-11-22 : first release for asustor

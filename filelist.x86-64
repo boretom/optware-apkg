@@ -6,10 +6,10 @@
 ./CONTROL/post-install.sh
 ./CONTROL/pre-install.sh
 ./CONTROL/start-stop.sh
-./bin/asustor-x86_64-bootstrap_1.2-7_x86_64.xsh
 ./etc/S99Optware
 ./etc/profile
 ./etc/profile.d/optware.sh
 ./local-feed/asustor-x86_64/cross/unstable/Packages
 ./local-feed/asustor-x86_64/cross/unstable/Packages.filelist
 ./local-feed/asustor-x86_64/cross/unstable/Packages.gz
+./packages/ipkg-opt_0.99.163-10_x86_64.ipk
