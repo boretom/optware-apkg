@@ -45,6 +45,8 @@ case "$1" in
 		rm /opt
 		mkdir /opt
 		move_to_opt
+		# delete the empty directories in optware/opt recursively
+		$FIND ${PKG_DIR}/opt -depth -type d -empty | xargs rmdir -p
 	fi
 	# remove the ENV variable from /etc/profile
 	sed -i -e '/^export ENV=\/opt\/etc\/profile$/d' /etc/profile

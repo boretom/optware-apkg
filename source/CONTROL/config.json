@@ -2,12 +2,12 @@
   "general":{
 	"package":"optware",
 	"name":"Optware ipkg",
-	"version":"0.99.163-tk-1",
+	"version":"0.99.163-tk-2",
 	"depends":[],
 	"conflicts":[],
 	"developer":"Unslung",
 	"maintainer":"MrK",
-	"email":"",
+	"email":"optware-for-asustor@kupper.org",
 	"website":"http://www.nslu2-linux.org/wiki/Optware/HomePage",
 	"architecture":"##ARCH##",
 	"firmware":"2.0"

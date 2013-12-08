@@ -13,8 +13,6 @@ move_to_optware_opt () {
 	cd /opt
 	# find symlinks and coying them over to optware/opt
 	$FIND ./ -type l -exec $CP --parents -pP {} ${DEST_DIR}/ \;
-	# now delete everyting in /opt assuming there were only symlinks
-	rm -f /opt/*
 	cd $CURDIR
 }
 
@@ -29,7 +27,5 @@ move_to_opt () {
 		$CP --parents -pP $i /opt
 		$RM $i
 	done	
-	# delete the empty directories recursively
-	$FIND ./ -depth -type d -empty | xargs rmdir -p
 	cd $CURDIR
 }
