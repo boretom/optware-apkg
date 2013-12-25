@@ -1,3 +1,7 @@
+2013-12-25 : fix hard-coded i686 filename in post-install.sh script for 64-bit
+             arch.
+2013-12-16 : add optware.kupper.org repository for x86_64 arch since there is
+             no official nslu2 repo for 64-bit yet
 2013-12-08 : fix a bug in copying optware/etc/profile.d directory and removing
              /opt content
 2013-12-06 : changed install method from running the xsh script to manually

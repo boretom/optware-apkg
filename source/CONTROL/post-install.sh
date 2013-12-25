@@ -5,7 +5,7 @@ export PKG_DIR=$APKG_PKG_DIR
 export OPTWARE_PKG_DIR=/volume1/Optware
 
 export INSTALL_LOG=$PKG_DIR/bootstrap_$(date +"%Y%m%d_%H%M%S").log
-export IPKG_NAME=ipkg-opt_0.99.163-10_i686.ipk
+export IPKG_NAME=ipkg-opt_0.99.163-10_${HOST_ARCH}.ipk
 export ASUSTOR_LOCAL_FEED=asustor-${HOST_ARCH}-feed.conf
 export ASUSTOR_KUPPER_FEED="asustor-${HOST_ARCH}-kupper-org-feed.conf"
 
