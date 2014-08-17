@@ -28,10 +28,11 @@ case "$1" in
 		fi
 	fi
 	if ! grep '^export ENV=/opt/etc/profile' /etc/profile ; then
-	   echo 'export ENV=/opt/etc/profile' >> /etc/profile
+		echo 'export ENV=/opt/etc/profile' >> /etc/profile
 	fi
 	if ! grep '^include /opt/etc/ld\.so\.conf.d/\*\.conf' /etc/ld.so.conf ; then
-	   echo 'include /opt/etc/ld.so.conf.d/*.conf' >> /etc/ld.so.conf
+		echo 'include /opt/etc/ld.so.conf.d/*.conf' >> /etc/ld.so.conf
+		/sbin/ldconfig >/dev/null 2>&1
 	fi
 
 	# run the optware init scripts
@@ -55,6 +56,7 @@ case "$1" in
 	sed -i -e '/^export ENV=\/opt\/etc\/profile$/d' /etc/profile
 	# remove the ld.so.conf.d path from /etc/ld.so.conf
 	sed -i -e '/^include \/opt\/etc\/ld\.so\.conf\.d\/\*\.conf$/d' /etc/ld.so.conf
+	/sbin/ldconfig >/dev/null 2>&1
 
 	;;
 

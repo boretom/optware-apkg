@@ -44,12 +44,27 @@ case "$APKG_PKG_STATUS" in
 		cd ..
 		rm -rf $TMP_DIR
 
-		echo "$MSG_PREFIX copy profile and profile.d to /opt/etc" >> $INSTALL_LOG 2>&1
-		cp -a $PKG_DIR/etc/profile $PKG_DIR/opt/etc/
-		cp -aR $PKG_DIR/etc/profile.d $PKG_DIR/opt/etc/
+		echo "$MSG_PREFIX copy profile.default" >> $INSTALL_LOG 2>&1
+		cp -af $PKG_DIR/etc/profile.default $PKG_DIR/opt/etc/
+		if [ ! -f $PKG_DIR/opt/etc/profile ]; then
+			echo "$MSG_PREFIX copy profile and /opt/etc" >> $INSTALL_LOG 2>&1
+			cp -a $PKG_DIR/etc/profile $PKG_DIR/opt/etc/
+		else
+			echo "$MSG_PREFIX /opt/etc/profile does already exist, won't be copied" >> $INSTALL_LOG 2>&1
+		fi
+		if [ ! -d $PKG_DIR/opt/etc/profile.d ]; then
+			echo "$MSG_PREFIX copy profile.d to /opt/etc" >> $INSTALL_LOG 2>&1
+			cp -aR $PKG_DIR/etc/profile.d $PKG_DIR/opt/etc/
+		else
+			echo "$MSG_PREFIX /opt/etc/profile.d does already exist, won't be copied" >> $INSTALL_LOG 2>&1
+		fi
 
-		echo "$MSG_PREFIX copy ld.so.conf.d to /opt/etc" >> $INSTALL_LOG 2>&1
-		cp -aR $PKG_DIR/etc/ld.so.conf.d $PKG_DIR/opt/etc/
+		if [ ! -d $PKG_DIR/opt/etc/ld.so.conf.d ]; then
+			echo "$MSG_PREFIX copy ld.so.conf.d to /opt/etc" >> $INSTALL_LOG 2>&1
+			cp -aR $PKG_DIR/etc/ld.so.conf.d $PKG_DIR/opt/etc/
+		else
+			echo "$MSG_PREFIX /opt/etc/ld.so.conf.d does already exist, won't be copied" >> $INSTALL_LOG 2>&1
+		fi
 
 		rm -rf $PKG_DIR/etc
 

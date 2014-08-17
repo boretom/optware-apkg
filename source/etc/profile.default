@@ -1,0 +1,8 @@
+if [ -d /opt/etc/profile.d ]; then
+  for i in /opt/etc/profile.d/*.sh; do
+      if [ -r $i ]; then
+          . $i
+      fi
+  done
+  unset i
+fi

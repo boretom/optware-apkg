@@ -8,7 +8,8 @@
 ./CONTROL/start-stop.sh
 ./bin/i686/cp
 ./bin/i686/find
-./etc/profile/
+./etc/profile
+./etc/profile.default
 ./etc/profile.d/
 ./etc/ld.so.conf.d/
 ./lib/sh-functions
