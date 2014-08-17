@@ -8,8 +8,9 @@
 ./CONTROL/start-stop.sh
 ./bin/i686/cp
 ./bin/i686/find
-./etc/profile
-./etc/profile.d/optware.sh
+./etc/profile/
+./etc/profile.d/
+./etc/ld.so.conf.d/
 ./lib/sh-functions
 ./local-feed/asustor-i686/cross/unstable/Packages
 ./local-feed/asustor-i686/cross/unstable/Packages.filelist

@@ -1,3 +1,5 @@
+0.99.163-tk-5 : add ld.so.conf.d to include /opt/lib in the library search path
+
 2013-12-25 : fix hard-coded i686 filename in post-install.sh script for 64-bit
              arch.
 2013-12-16 : add optware.kupper.org repository for x86_64 arch since there is

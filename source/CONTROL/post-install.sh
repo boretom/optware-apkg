@@ -47,6 +47,10 @@ case "$APKG_PKG_STATUS" in
 		echo "$MSG_PREFIX copy profile and profile.d to /opt/etc" >> $INSTALL_LOG 2>&1
 		cp -a $PKG_DIR/etc/profile $PKG_DIR/opt/etc/
 		cp -aR $PKG_DIR/etc/profile.d $PKG_DIR/opt/etc/
+
+		echo "$MSG_PREFIX copy ld.so.conf.d to /opt/etc" >> $INSTALL_LOG 2>&1
+		cp -aR $PKG_DIR/etc/ld.so.conf.d $PKG_DIR/opt/etc/
+
 		rm -rf $PKG_DIR/etc
 
 		echo "$MSG_PREFIX copy local package feed template (empty package list) if empty" >> $INSTALL_LOG 2>&1
